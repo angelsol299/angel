@@ -13,12 +13,19 @@ function Cart(props) {
         </tr>
       </thead>
       <tbody>
-        {props.cart.map(item => {
+        {props.cart.map(item => (
           <tr>
             <td>{item.name}</td>
             <td>{item.quantity}</td>
-          </tr>;
-        })}
+            <td>
+              <button onClick={e => props.addToCart(item)}>+</button>
+              <button onClick={e => props.removeFromCart(item)}>-</button>
+            </td>
+            <td>
+              <button />
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
@@ -30,7 +37,18 @@ function mapsStateToProps(state) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    addToCart: item => {
+      dispatch({ type: "ADD", payload: item });
+    },
+    removeFromCart: item => {
+      dispatch({ type: "REMOVE", payload: item });
+    }
+  };
+}
+
 export default connect(
   mapsStateToProps,
-  map
+  mapDispatchToProps
 )(Cart);
