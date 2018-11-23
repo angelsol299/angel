@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 
+function sort(items) {
+  return items.sort((a, b) => a.id < b.id);
+}
+
 function Cart(props) {
   return (
     <table>
@@ -13,16 +17,18 @@ function Cart(props) {
         </tr>
       </thead>
       <tbody>
-        {props.cart.map(item => (
+        {sort(props.cart).map(item => (
           <tr>
             <td>{item.name}</td>
             <td>{item.quantity}</td>
             <td>
-              <button onClick={e => props.addToCart(item)}>+</button>
-              <button onClick={e => props.removeFromCart(item)}>-</button>
+              <button onClick={() => props.addToCart(item)}>+</button>
+              <button onClick={() => props.removeFromCart(item)}>-</button>
             </td>
             <td>
-              <button />
+              <button onClick={() => props.removeAllFromCArt(item)}>
+                Remove all from cart
+              </button>
             </td>
           </tr>
         ))}
@@ -44,6 +50,9 @@ function mapDispatchToProps(dispatch) {
     },
     removeFromCart: item => {
       dispatch({ type: "REMOVE", payload: item });
+    },
+    removeAllFromCart: item => {
+      dispatch({ type: "REMOVE_ALL", payload: item });
     }
   };
 }

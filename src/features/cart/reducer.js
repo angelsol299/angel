@@ -13,6 +13,10 @@ const addToCart = (cart, item) => {
       ];
 };
 
+const removeAllFromCart = (cart, item) => {
+  return [...cartWithoutItem(cart, item)];
+};
+
 const removeFromCart = (cart, item) => {
   return item.quantity === 1
     ? [...cartWithoutItem(cart, item)]
@@ -29,6 +33,9 @@ const cartReducer = (state = [], action) => {
 
     case "REMOVE":
       return removeFromCart(state, action.payload);
+
+    case "REMOVE_ALL":
+      return removeAllFromCart(state, action.payload);
 
     default:
       return state;
