@@ -1,4 +1,5 @@
 import React from "react";
+import AddBtn from "./add-btn";
 
 function ProductListItem(props) {
   return (
@@ -13,9 +14,11 @@ function ProductListItem(props) {
       <div>{props.product.description}</div>
       <div>${props.product.price}</div>
       <div>
-        <button onClick={() => props.addToCart(props.product)}>
-          Add to cart ({(props.cartItem && props.cartItem.quantity) || 0})
-        </button>
+        <AddBtn
+          cartItem={props.cartItem}
+          product={props.product}
+          addToCart={props.addToCart}
+        />
       </div>
     </div>
   );
