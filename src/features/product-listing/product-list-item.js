@@ -20,12 +20,13 @@ function ProductListItem(props) {
           product={props.product}
           addToCart={props.addToCart}
         />
-        {props.cartItem}
-        <RemoveBtn
-          cartItem={props.cartItem}
-          product={props.product}
-          addToCart={props.addToCart}
-        />
+        {props.cartItem ? (
+          <RemoveBtn
+            cartItem={props.cartItem}
+            product={props.product}
+            removeFromCart={props.removeFromCart}
+          />
+        ) : null}
       </div>
     </div>
   );
