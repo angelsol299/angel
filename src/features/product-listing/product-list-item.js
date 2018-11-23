@@ -1,5 +1,6 @@
 import React from "react";
 import AddBtn from "./add-btn";
+import RemoveBtn from "./remove-btn";
 
 function ProductListItem(props) {
   return (
@@ -15,6 +16,12 @@ function ProductListItem(props) {
       <div>${props.product.price}</div>
       <div>
         <AddBtn
+          cartItem={props.cartItem}
+          product={props.product}
+          addToCart={props.addToCart}
+        />
+        {props.cartItem}
+        <RemoveBtn
           cartItem={props.cartItem}
           product={props.product}
           addToCart={props.addToCart}
