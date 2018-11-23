@@ -1,12 +1,36 @@
 import React from "react";
 import { connect } from "react-redux";
 
-export const cartItemsWithQuantities = cartItems => {
-  return cartItems.reduce((acc, item) => {
-    const filteredItem = acc.filter(item2 => item2.id === item.id)[0];
-    filteredItem !== undefined
-      ? filteredItem.quantity++
-      : acc.push({ ...item, quantity: 1 });
-    return acc;
-  }, []);
-};
+function Cart(props) {
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantity</th>
+          <th />
+          <th />
+        </tr>
+      </thead>
+      <tbody>
+        {props.cart.map(item => {
+          <tr>
+            <td>{item.name}</td>
+            <td>{item.quantity}</td>
+          </tr>;
+        })}
+      </tbody>
+    </table>
+  );
+}
+
+function mapsStateToProps(state) {
+  return {
+    cart: state.cart
+  };
+}
+
+export default connect(
+  mapsStateToProps,
+  map
+)(Cart);
